@@ -18,8 +18,6 @@ router.route(permission.classroom_get_all.path).get(controller.getAll);
 // get single classroom  
 router.route(permission.classroom_get_by_id.path).get(controller.getOne);
 
-//  search class by name 
-router.route(permission.search_by_name.path).get(controller.getSearch);
 
 // add classroom
 router
