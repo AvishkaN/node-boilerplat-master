@@ -1,6 +1,9 @@
-// import token service
+// import path
 const path = require('path');
+// import token service
 const tokenService = require('./tokenService');
+// import token errorHTML
+const erromHtml = './../htmlResponse/errorMsg.html';
 
 module.exports = {
   badRequest(res) {
@@ -16,7 +19,7 @@ module.exports = {
     });
   },
   errorConfirmation(res) {
-    res.sendFile(path.resolve(`${__dirname}/../htmlResponse/errorMsg.html`));
+    res.sendFile(path.resolve(`${__dirname}${erromHtml}`));
   },
   customErrorWithoutCode(message, res) {
     return res.json({

@@ -52,8 +52,8 @@ module.exports.getAll = async (queryParams) => {
     
     try {
       const count = await this.count(query);
-      const data = await repository.findAll(query,+queryParams.limit,+queryParams.skip);
-
+      const data = await repository.findAll(query,parseInt(queryParams.limit),parseInt(queryParams.skip));
+      
       
       if (!data || data.length == 0) {
         resolve({
