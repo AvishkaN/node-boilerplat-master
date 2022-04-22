@@ -19,6 +19,12 @@ const schema = new mongoose.Schema({
     trim: true,
     required: true,
   },
+  school_id: {
+
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'school',
+    required: true,
+  },
   created_at: {
     type: Date,
     default: new Date(),

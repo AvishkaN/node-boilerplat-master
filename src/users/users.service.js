@@ -161,7 +161,6 @@ module.exports.create = async (obj) => {
       // generate conf code
       obj.confirmation_code = uniqId();   
 
-      // console.log('00000000',obj.confirmation_code); 
 
       // hash the password
       const newPassword = shortid.generate();
@@ -175,7 +174,6 @@ module.exports.create = async (obj) => {
       //   data.confirmation_code
       // );
 
-      console.log(data);  
 
       resolve(data);
     } catch (error) {

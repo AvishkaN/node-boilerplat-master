@@ -46,14 +46,11 @@ module.exports.save = (obj) => {
 // update object
 module.exports.updateSingleObject = (query, obj) => {
   return new Promise((resolve, reject) => {
-    console.log(`0000`); 
     
     model
     .findOneAndUpdate(query, obj, { new: true, safe: true })
     // .find({_id: "6261d119be92123848878544",is_deleted: false})
     .then((data) => {
-      console.log(data); 
-      console.log(query, obj);
         resolve(data);
       })
       .catch((err) => {

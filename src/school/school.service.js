@@ -33,7 +33,6 @@ module.exports.getById = async (id) => {
   return new Promise(async (resolve, reject) => {
     try {
       const data = await repository.findById({ _id: id });
-      console.log(data);
 
       if (!data || data.length == 0) {  
         reject('No data found from given id');
@@ -54,7 +53,6 @@ module.exports.getById = async (id) => {
 module.exports.save = async (obj) => {
   return new Promise(async (resolve, reject) => {
     try {
-      // console.log(obj);  
       const data = await repository.save(obj);
       resolve(data);
     } catch (error) {
@@ -109,7 +107,6 @@ module.exports.updateSingleObj = async (obj) => {
 module.exports.DeleteSingleObject = async (id) => {
   return new Promise(async (resolve, reject) => {
     try {
-      // console.log(ObjectId(id));
       const data = await repository.updateSingleObject(
         // { _id: ObjectId(id), is_deleted: false },
         // { is_deleted: true }
@@ -121,13 +118,9 @@ module.exports.DeleteSingleObject = async (id) => {
       if (!data) {
         reject(`No data found from given  id`);
       } else {
-        // console.log(`1111`);
-        // console.log(data);
         resolve(data);
       }
     } catch (error) {
-      // console.log(`0000`);
-      // console.log(error);
       reject(error);
     }
   });

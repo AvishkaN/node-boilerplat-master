@@ -26,7 +26,6 @@ module.exports.getOne = async (req, res) => {
 // POST single object
 module.exports.postData = async (req, res) => {      
   try {
-    console.log('0000',req.body); 
     const output = await service.save(req.body);
     return response.successWithData(output, res);
   } catch (error) {
@@ -47,7 +46,6 @@ module.exports.putData = async (req, res) => {
 // Delete single object
 module.exports.deleteData = async (req, res) => {
   try {
-    console.log(req.params.id);  
     const output = await service.DeleteSingleObject(req.params.id);
     return response.successWithData(output, res);
   } catch (error) {

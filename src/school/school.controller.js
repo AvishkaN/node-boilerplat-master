@@ -13,6 +13,12 @@ module.exports.getAll = async (req, res) => {
   }
 };
 
+
+
+
+
+
+
 // GET single school 
 module.exports.getOne = async (req, res) => {
   try { 
@@ -43,16 +49,7 @@ module.exports.putData = async (req, res) => {
   }
 };
 
-// Delete single object
-// module.exports.deleteData = async (req, res) => {
-//   try {
-//     console.log(req.params.id);  
-//     const output = await service.DeleteSingleObject(req.params.id);
-//     return response.successWithData(output, res);
-//   } catch (error) {
-//     return response.customError(error, res);
-//   }
-// };
+
 
 
 // Delete single school

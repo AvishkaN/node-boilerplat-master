@@ -1,11 +1,32 @@
 // import model
 const model = require('./classroom.model');
 
-// find all
-module.exports.findAll = (query) => {
+
+// count
+module.exports.count = (query) => {
   return new Promise((resolve, reject) => {
     model
+      .count(query)
+      .then((data) => {
+        resolve(data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+// find all
+module.exports.findAll = (query,limit=0,skip=0) => {
+  return new Promise((resolve, reject) => {
+
+
+
+    model
       .find(query)
+      .limit(limit) 
+      .skip(skip)
+      .populate('s`chool_id`')
       .then((data) => {
         resolve(data);
       })
@@ -20,6 +41,7 @@ module.exports.findById = (query) => {
   return new Promise((resolve, reject) => {
     model
       .findById(query)
+      .populate('school_id')
       .then((data) => {
         resolve(data);
       })
@@ -46,14 +68,10 @@ module.exports.save = (obj) => {
 // update object
 module.exports.updateSingleObject = (query, obj) => {
   return new Promise((resolve, reject) => {
-    console.log(`0000`); 
     
     model
     .findOneAndUpdate(query, obj, { new: true, safe: true })
-    // .find({_id: "6261d119be92123848878544",is_deleted: false})
     .then((data) => {
-      console.log(data); 
-      console.log(query, obj);
         resolve(data);
       })
       .catch((err) => {

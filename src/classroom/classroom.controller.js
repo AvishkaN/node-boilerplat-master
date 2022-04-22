@@ -6,8 +6,9 @@ const response = require('../../services/responseService');
 // GET all classrooms
 module.exports.getAll = async (req, res) => {
   try {
-    const output = await service.getAll();
-    return response.successWithData(output, res);
+    
+    const output = await service.getAll(req.query);
+    return response.successWithPaginationData(output, res);
   } catch (error) {
     return response.customError(error, res);
   }
@@ -17,6 +18,16 @@ module.exports.getAll = async (req, res) => {
 module.exports.getOne = async (req, res) => {
   try { 
     const output = await service.getById(req.params.id);
+    return response.successWithData(output, res);
+  } catch (error) {
+    return response.customError(error, res);
+  }
+};
+
+// GET single classroom by Name 
+module.exports.getSearch = async (req, res) => {
+  try { 
+    const output = await service.getBysearch(req.query.schoolName);
     return response.successWithData(output, res);
   } catch (error) {
     return response.customError(error, res);
@@ -43,16 +54,7 @@ module.exports.putData = async (req, res) => {
   }
 };
 
-// Delete single object
-// module.exports.deleteData = async (req, res) => {
-//   try {
-//     console.log(req.params.id);  
-//     const output = await service.DeleteSingleObject(req.params.id);
-//     return response.successWithData(output, res);
-//   } catch (error) {
-//     return response.customError(error, res);
-//   }
-// };
+
 
 
 // Delete single classroom

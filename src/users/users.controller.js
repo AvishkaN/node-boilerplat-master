@@ -12,7 +12,6 @@ const {
 // GET all data set
 module.exports.getAll = async (req, res) => {
   try {
-    console.log('0000',req.query);
     const output = await service.getAll(req.query);
     return successWithPaginationData(output, res);
   } catch (error) {
