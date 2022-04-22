@@ -17,6 +17,10 @@ router.use(
 router.use('/users', require('../src/users/users.router'));
 // set card routes
 router.use('/cards', require('../src/card/card.router'));
+// set schools routes
+router.use('/schools', require('../src/school/school.router'));  
+// set classroom routes
+router.use('/classroom', require('../src/classroom/classroom.router'));  
 // set notification routes
 router.use(
   '/notifications',

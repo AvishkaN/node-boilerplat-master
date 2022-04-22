@@ -40,7 +40,12 @@ module.exports.validateBodyWithToken = (schema, grantedArray) => {
       
       // validate the API request body according to the schema defined
       joi.validate(req.body, schema);
-      // console.log(joi.validate(req.body, schema));   
+      // console.log(`555555`);       
+      // console.log(joi.validate(req.body, schema).error.message);   
+
+      if(joi.validate(req.body, schema).error){
+        throw new Error(joi.validate(req.body, schema).error.message);
+      }
       
       // verify token and check the expiration time.
       const decoded = jwt.verify(getTokenFromHeader(req), secret);
@@ -49,7 +54,7 @@ module.exports.validateBodyWithToken = (schema, grantedArray) => {
       return next();
       
     } catch (error) {
-      console.log(error);       
+      console.log(response.customError(error.message, res));       
       return response.customError(error, res);
     }
 

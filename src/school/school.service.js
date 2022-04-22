@@ -1,5 +1,8 @@
 // import repository
-const repository = require('./card.repository');
+const repository = require('./school.repository');
+// import ObjectId
+const ObjectId = require('mongodb').ObjectID;
+
 
 /**
  * GET all data set
@@ -9,7 +12,7 @@ const repository = require('./card.repository');
 module.exports.getAll = async () => {
   return new Promise(async (resolve, reject) => {
     try {
-      const data = await repository.findAll();
+      const data = await repository.findAll({is_deleted: false});
       if (!data || data.length == 0) {
         resolve([]);
       } else {
@@ -51,7 +54,7 @@ module.exports.getById = async (id) => {
 module.exports.save = async (obj) => {
   return new Promise(async (resolve, reject) => {
     try {
-      console.log(obj);  
+      // console.log(obj);  
       const data = await repository.save(obj);
       resolve(data);
     } catch (error) {
@@ -87,16 +90,44 @@ module.exports.updateSingleObj = async (obj) => {
  * @input {objId}
  * @output {object}
  */
+// module.exports.DeleteSingleObject = async (id) => {
+//   return new Promise(async (resolve, reject) => {
+//     try {
+//       const data = await repository.removeObject({ _id: id });
+//       if (!data) {
+//         reject('No data found from given id');
+//       } else {
+//         resolve(data);
+//       }
+//     } catch (error) {
+//       reject(error);
+//     }
+//   });
+// };
+
+
 module.exports.DeleteSingleObject = async (id) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const data = await repository.removeObject({ _id: id });
+      // console.log(ObjectId(id));
+      const data = await repository.updateSingleObject(
+        // { _id: ObjectId(id), is_deleted: false },
+        // { is_deleted: true }
+
+
+        { _id: ObjectId(id),is_deleted: false },
+        {is_deleted: true}
+      );
       if (!data) {
-        reject('No data found from given id');
+        reject(`No data found from given  id`);
       } else {
+        // console.log(`1111`);
+        // console.log(data);
         resolve(data);
       }
     } catch (error) {
+      // console.log(`0000`);
+      // console.log(error);
       reject(error);
     }
   });
