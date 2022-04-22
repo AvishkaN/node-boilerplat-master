@@ -20,13 +20,11 @@ module.exports.count = (query) => {
 module.exports.findAll = (query,limit=0,skip=0) => {
   return new Promise((resolve, reject) => {
 
-
-
     model
       .find(query)
       .limit(limit) 
       .skip(skip)
-      .populate('s`chool_id`')
+      .populate('school_id')
       .then((data) => {
         resolve(data);
       })

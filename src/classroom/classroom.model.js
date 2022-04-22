@@ -25,19 +25,21 @@ const schema = new mongoose.Schema({
     ref: 'school',
     required: true,
   },
-  created_at: {
-    type: Date,
-    default: new Date(),
-  },
-  updated_at: {
-    type: Date,
-    default: new Date(),
-  },
+  // created_at: {
+  //   type: Date,
+  //   default: new Date(),
+  // },
+  // updated_at: {
+  //   type: Date,
+  //   default: new Date(),
+  // },
   is_deleted: {
     type: Boolean,
     default: false,
   },
-});
+},
+{ timestamps: true }
+);
 
 // create modal
 const model = mongoose.model(model_name, schema);
