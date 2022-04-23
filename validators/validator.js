@@ -116,8 +116,8 @@ module.exports.validateBody = (schema) => {
 module.exports.validateHeader = (grantedArray) => {
   return (req, res, next) => {
     // eslint-disable-next-line consistent-return
-    return jwt.verify(getTokenFromHeader(req), secret, async (err, decoded) => {
-      if (err) {
+    jwt.verify(getTokenFromHeader(req), secret, async (err, decoded) => {
+       if (err) {
         return response.customError('Invalid Token', res);
       }
       try {

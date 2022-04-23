@@ -139,7 +139,7 @@ module.exports.save = async (obj) => {
       obj.password = createPasswordHash(obj.password);
       const data = await repository.save(obj);
       // send email
-      // mailSender.welcomeMail(data.email, data.name, data.confirmation_code);
+      mailSender.welcomeMail(data.email, data.name, data.confirmation_code);
       resolve(data);
     } catch (error) {
       reject(error);
