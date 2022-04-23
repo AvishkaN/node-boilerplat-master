@@ -5,11 +5,11 @@ emailConfig.port = 587; // secure SMTP;
 emailConfig.secure_connection = false; // false for TLS - as a boolean not string
 emailConfig.request_auth = true; // false for TLS - as a boolean not string
 
-emailConfig.feedbackMail = ['jayathissaara@gmail.com'];
-emailConfig.notificationMail = ['jayathissaara@gmail.com', 'jayathissaara@gmail.com'];
-emailConfig.email = 'samanjayalal70@gmail.com';
+emailConfig.feedbackMail = ['kasun@speralabs.com'];
+emailConfig.notificationMail = ['kasun@speralabs.com', 'sahan@speralabs.com'];
+emailConfig.email = 'test.speralabs@gmail.com';
 
-emailConfig.password = 'samn%^$jaya&^^$;;';
+emailConfig.password = 'speralabs123';
 emailConfig.domains = ['gmail.com', 'googlemail.com'];
 emailConfig.invoiceAttachmentPath = '';
 

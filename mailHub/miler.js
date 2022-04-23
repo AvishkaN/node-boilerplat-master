@@ -14,10 +14,14 @@ const transporter = nodemailer.createTransport({
   auth: {
     user: mailConfig.email,
     pass: mailConfig.password,
-  },
+  }
 });
 
-mailSender.welcomeMail = function (toAddress, firstName, code) {
+
+
+
+
+mailSender.welcomeMail = function (toAddress, firstName, code) { 
   const mailSubject = `Welcome to ${config.app_name}`;
   return setMailConfiguration(
     toAddress,
@@ -81,6 +85,10 @@ function setMailConfiguration(reciever, subject, mailBody) {
 
   return transporter.sendMail(mailOptions);
 }
+
+
+
+
 
 /**
  * create email configuration and send mail with attachment

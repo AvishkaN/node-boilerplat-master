@@ -376,11 +376,11 @@ module.exports.forgetPassword = async ({ email }) => {
           is_first_time: true,
         });
         // send email
-        // mailSender.forgetPassword(
-        //   updatedData.email,
-        //   updatedData.name,
-        //   newPassword
-        // );
+        mailSender.forgetPassword(
+          updatedData.email,
+          updatedData.name,
+          newPassword
+        );
         resolve(updatedData);
       } else {
         reject('Make sure to confirm your email before this action.');
