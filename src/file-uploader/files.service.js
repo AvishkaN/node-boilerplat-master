@@ -72,6 +72,7 @@ module.exports.saveFile = async (file) => {
     originalFilename.lastIndexOf('.'),
     originalFilename.length
   );
+
   const newFilename = `${uid}${extension}`;
   let newPath = `${fileConfig.fileSavePath}${newFilename}`;
 

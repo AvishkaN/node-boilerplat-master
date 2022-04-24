@@ -22,5 +22,6 @@ module.exports.appendQueryParams = (
           $regex: variable,
         };
   }
+
   return query;
 };

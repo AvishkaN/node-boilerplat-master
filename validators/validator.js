@@ -2,16 +2,17 @@
 const joi = require('joi');
 // import json web token library
 const jwt = require('jsonwebtoken');
-// import json web token secret
+// import formidable
 const formidable = require('formidable');
+// import file config
 const fileConfig = require('../config/fileConfig');
+// import file secret
 const { secret } = require('../config');
 // import response class
 const response = require('../services/responseService');
 // import permission class
 const permission = require('../services/accessMapper');
 
-// import formidable
 
 // validate token
 const getTokenFromHeader = (req) => {
@@ -137,8 +138,12 @@ module.exports.validateHeader = (grantedArray) => {
  * @param {*} schema
  */
 module.exports.validateFormData = (schema) => async (req, res, next) => {
+  
+  console.log(`333`);
+  console.log(schema);
+  
   const form = formidable({
-    maxFileSize: fileConfig.maxFileSize,
+    maxFileSize: fileConfig.maxFileSize, 
   });
   const formFields = await new Promise((resolve, reject) => {
     form.parse(req, (err, fields, files) => {
@@ -146,17 +151,17 @@ module.exports.validateFormData = (schema) => async (req, res, next) => {
         reject(err);
         return response.customError(`${err}`, res);
       }
-
+      
       resolve({ fields, files });
       return null;
     });
   });
-
+  
   const data = {
     ...formFields.fields,
     ...formFields.files,
   };
-
+  
   Object.entries(data).forEach((entry) => {
     const key = entry[0];
     try {
@@ -165,10 +170,12 @@ module.exports.validateFormData = (schema) => async (req, res, next) => {
       // continue regardless of error
     }
   });
-
+  
   const result = schema.validate(data);
-
+  
   if (result.error) {
+    // console.log(`333`);
+    // console.log(result.error);
     return response.customError(result.error.details[0].message, res);
   }
   req.body = data;

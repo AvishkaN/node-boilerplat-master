@@ -47,13 +47,16 @@ module.exports.getAll = async (queryParams) => {
     query = appendService.appendQueryParams(queryParams, 'school_id', query,true);
     // search by student_count
     query = appendService.appendQueryParams(queryParams, 'student_count', query, true);
-    
 
     
+    
+    
     try {
+      
       const count = await this.count(query);
       const data = await repository.findAll(query,parseInt(queryParams.limit),parseInt(queryParams.skip));
       
+     
       
       if (!data || data.length == 0) {
         resolve({

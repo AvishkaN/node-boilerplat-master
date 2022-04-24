@@ -1,4 +1,5 @@
 // import model
+const { quality } = require('jimp');
 const model = require('./classroom.model');
 
 
