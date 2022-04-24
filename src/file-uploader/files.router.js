@@ -10,7 +10,13 @@ const joiConfig = require('../../config/joiConfig');
 
 const router = express.Router();
 
-const { filesAdd, filesDelete } = require('./files.permission').permission_list;
+const { filesAdd, filesDelete,files_get_by_id } = require('./files.permission').permission_list;
+
+
+// get single file  
+router.route(files_get_by_id.path).get(controller.getOne);
+
+
 
 // create file
 router

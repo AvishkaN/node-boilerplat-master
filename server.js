@@ -28,7 +28,6 @@ server.use(express.static(__dirname));
 // check environment
 const { isProduction } = config;
 
-// console.log('👍',isProduction);
 
 // // private key
 // let privateKey = fs.readFileSync(config.sslPrivetKeyPath);

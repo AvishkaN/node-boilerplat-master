@@ -1,7 +1,15 @@
 // import permission list
-const { admin } = require('../../config/permissionConfig').userRoles;
+const { admin,customer,staff } = require('../../config/permissionConfig').userRoles;
 
 module.exports.permission_list = {
+  files_get_by_id: {
+    path: '/:id',
+    granted: [
+      admin,
+      customer,
+      staff,
+    ],
+  },
   filesAdd: {
     path: '/',
     granted: [admin],

@@ -20,7 +20,6 @@ router
       schema.addOneRecord,
       permission.card_save.granted
     ),
-
     controller.postData
   );
 router

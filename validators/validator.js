@@ -44,6 +44,7 @@ module.exports.validateBodyWithToken = (schema, grantedArray) => {
       if(joi.validate(req.body, schema).error){
         throw new Error(joi.validate(req.body, schema).error.message);
       }
+
       
       // verify token and check the expiration time.
       const decoded = jwt.verify(getTokenFromHeader(req), secret);
@@ -51,7 +52,7 @@ module.exports.validateBodyWithToken = (schema, grantedArray) => {
       return next();
       
     } catch (error) {
-      return response.customError(error, res);
+      return response.customError(error.message, res);
     }
 
     // verify token and check the expiration time.
@@ -139,8 +140,6 @@ module.exports.validateHeader = (grantedArray) => {
  */
 module.exports.validateFormData = (schema) => async (req, res, next) => {
   
-  console.log(`333`);
-  console.log(schema);
   
   const form = formidable({
     maxFileSize: fileConfig.maxFileSize, 
@@ -174,8 +173,6 @@ module.exports.validateFormData = (schema) => async (req, res, next) => {
   const result = schema.validate(data);
   
   if (result.error) {
-    // console.log(`333`);
-    // console.log(result.error);
     return response.customError(result.error.details[0].message, res);
   }
   req.body = data;

@@ -7,6 +7,23 @@ const {
   successWithData,
 } = require('../../services/responseService');
 
+
+
+// GET single file 
+module.exports.getOne = async (req, res) => { 
+  try { 
+    const output = await service.getById(req.params.id);
+    // return successWithData(output.new_filename, res);
+    return res.end(output.original_filename);
+    // return successWithData(output, res);
+  } catch (error) {
+    return customError(error, res);
+  }
+};
+
+
+
+
 /**
  * Save file
  * @param req

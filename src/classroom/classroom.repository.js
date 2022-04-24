@@ -40,7 +40,6 @@ module.exports.findById = (query) => {
   return new Promise((resolve, reject) => {
     model
       .findById(query)
-      .populate('school_id')
       .then((data) => {
         resolve(data);
       })

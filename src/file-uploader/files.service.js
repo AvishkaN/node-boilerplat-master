@@ -23,6 +23,34 @@ const resizeImage = async (filePath, resizingPath, width, height) => {
     .writeAsync(resizingPath);
 };
 
+
+
+
+/**
+ * GET single file
+ * @input {id}
+ * @output {obj}
+ */
+ module.exports.getById = async (id) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const data = await repository.findfileById({ _id: id });
+
+      if (!data || data.length == 0) {  
+        reject('No file found from given id');
+      } else {
+        resolve(data);
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+
+
+
+
 /**
  * Delete file from storage
  * @param id
@@ -87,14 +115,21 @@ module.exports.saveFile = async (file) => {
 
       await resizeImage(newPath, newPath, dimension.width, dimension.height);
     });
-    return repository.save({
+    
+    // save file
+    repository.save({
       new_filename: newFilename,
       original_filename: originalFilename,
     });
+
+    
+    return fs.renameSync(oldPath, newPath);
   }
 
   // save file
   fs.renameSync(oldPath, newPath);
+
+
 
   return repository.save({
     new_filename: newFilename,
