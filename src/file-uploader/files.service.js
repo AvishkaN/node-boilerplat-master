@@ -17,6 +17,7 @@ const fileConfig = require('../../config/fileConfig');
  */
 const resizeImage = async (filePath, resizingPath, width, height) => {
   const image = await jimp.read(filePath);
+
   await image
     .resize(parseInt(width, 10), parseInt(height, 10))
     .quality(fileConfig.imageResizeQuality)
@@ -99,10 +100,10 @@ module.exports.saveFile = async (file) => {
   const extension = originalFilename.substring(
     originalFilename.lastIndexOf('.'),
     originalFilename.length
-  );
-
-  const newFilename = `${uid}${extension}`;
-  let newPath = `${fileConfig.fileSavePath}${newFilename}`;
+    );
+    
+    const newFilename = `${uid}${extension}`;
+    let newPath = `${fileConfig.fileSavePath}${newFilename}`;
 
   // If it is an image
   if (fileConfig.imageTypes.includes(file.body.demo_file.type)) {
@@ -112,7 +113,6 @@ module.exports.saveFile = async (file) => {
 
       // Save file in location
       fs.copyFileSync(oldPath, newPath);
-      
 
       await resizeImage(newPath, newPath, dimension.width, dimension.height);
     });
@@ -123,8 +123,13 @@ module.exports.saveFile = async (file) => {
       original_filename: originalFilename,
     });
 
-    
     // return fs.renameSync(oldPath, newPath);
+
+
+    return repository.save({
+      new_filename: newFilename,
+      original_filename: originalFilename,
+    });
   }
 
   // save file
