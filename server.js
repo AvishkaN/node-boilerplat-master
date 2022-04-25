@@ -44,13 +44,13 @@ const { isProduction } = config;
 // Database Connection initiation
 if (isProduction) {
   mongoose.connect(`mongodb:${config.database}`, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,     
+    useNewUrlParser: true,
+   useUnifiedTopology: true  
   });
 } else {
   mongoose.connect(`mongodb:${config.testDatabase}`, {
-    useUnifiedTopology: true,
     useNewUrlParser: true,
+   useUnifiedTopology: true
   });
   mongoose.set('debug', true);
   mongoose.set('useCreateIndex', true);

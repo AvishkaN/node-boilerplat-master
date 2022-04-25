@@ -13,6 +13,10 @@ const response = require('../services/responseService');
 // import permission class
 const permission = require('../services/accessMapper');
 
+const service = require('./../src/users/users.service');
+
+
+
 
 // validate token
 const getTokenFromHeader = (req) => {
@@ -33,7 +37,7 @@ const getTokenFromHeader = (req) => {
  * @param {*} schema , header tokens
  */
 module.exports.validateBodyWithToken = (schema, grantedArray) => {
-  return (req, res, next) => {
+  return async(req, res, next) => {
     try {
 
       
@@ -41,6 +45,7 @@ module.exports.validateBodyWithToken = (schema, grantedArray) => {
       // validate the API request body according to the schema defined
       joi.validate(req.body, schema);
 
+      // check if --> joi return error
       if(joi.validate(req.body, schema).error){
         throw new Error(joi.validate(req.body, schema).error.message);
       }
@@ -48,27 +53,19 @@ module.exports.validateBodyWithToken = (schema, grantedArray) => {
       
       // verify token and check the expiration time.
       const decoded = jwt.verify(getTokenFromHeader(req), secret);
+
+      // check user exist 
+      const user = await service.getById(decoded.user_id);
+
+
+
       permission.validity(decoded.role, grantedArray);  
       return next();
       
     } catch (error) {
-      return response.customError(error.message, res);
+      return response.customError(error, res);
     }
 
-    // verify token and check the expiration time.
-    // jwt.verify(getTokenFromHeader(req), secret, async (err, decoded) => {
-    //   if (err) {
-    //     return response.customError('Invalid Token', res);
-    //   }
-    //   try {
-    //     const output = await permission.validity(decoded.role, grantedArray);
-    //     next();
-    //     return output;
-    //   } catch (error) {
-    //     return response.customError(error, res);
-    //   }
-    // });
-    // return result;
   };
 };
 

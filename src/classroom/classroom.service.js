@@ -160,29 +160,11 @@ module.exports.updateSingleObj = async (obj) => {
  * @input {objId}
  * @output {object}
  */
-// module.exports.DeleteSingleObject = async (id) => {
-//   return new Promise(async (resolve, reject) => {
-//     try {
-//       const data = await repository.removeObject({ _id: id });
-//       if (!data) {
-//         reject('No data found from given id');
-//       } else {
-//         resolve(data);
-//       }
-//     } catch (error) {
-//       reject(error);
-//     }
-//   });
-// };
-
 
 module.exports.DeleteSingleObject = async (id) => {
   return new Promise(async (resolve, reject) => {
     try {
       const data = await repository.updateSingleObject(
-        // { _id: ObjectId(id), is_deleted: false },
-        // { is_deleted: true }
-
 
         { _id: ObjectId(id),is_deleted: false },
         {is_deleted: true}

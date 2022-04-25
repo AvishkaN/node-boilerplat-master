@@ -63,7 +63,7 @@ module.exports.getAll = async (queryParams) => {
       const data = await repository.findAll(query, queryParams);
       if (!data || data.length == 0) {
         resolve({
-          count,
+          count:0,
           value: [],
         });
       } else {
@@ -89,7 +89,7 @@ module.exports.getById = async (id) => {
       const data = await repository.findById({ _id: id });
 
       if (!data || data.length == 0) {
-        reject(`No data found from given ${collectionName} id`);
+        reject(`Not user found from given ${collectionName} id`);
       } else {
         resolve(data);
       }

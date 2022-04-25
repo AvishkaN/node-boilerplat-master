@@ -112,6 +112,7 @@ module.exports.saveFile = async (file) => {
 
       // Save file in location
       fs.copyFileSync(oldPath, newPath);
+      
 
       await resizeImage(newPath, newPath, dimension.width, dimension.height);
     });
@@ -123,11 +124,11 @@ module.exports.saveFile = async (file) => {
     });
 
     
-    return fs.renameSync(oldPath, newPath);
+    // return fs.renameSync(oldPath, newPath);
   }
 
   // save file
-  fs.renameSync(oldPath, newPath);
+  // fs.renameSync(oldPath, newPath);
 
 
 

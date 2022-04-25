@@ -14,7 +14,7 @@ const { filesAdd, filesDelete,files_get_by_id } = require('./files.permission').
 
 
 // get single file  
-router.route(files_get_by_id.path).get(controller.getOne);
+// router.route(files_get_by_id.path).get(controller.getOne);
 
 
 
